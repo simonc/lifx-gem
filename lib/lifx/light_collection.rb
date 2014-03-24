@@ -21,7 +21,7 @@ module LIFX
     # Creates a {LightCollection} instance. Should not be used directly.
     # @api private
     # @param context: [NetworkContext] NetworkContext this collection belongs to
-    # @param tag: [String] Tag 
+    # @param tag: [String] Tag
     def initialize(context:, tag: nil)
       @context = context
       @tag = tag
@@ -52,11 +52,7 @@ module LIFX
     # @param label [String, Regexp] Label
     # @return [Light]
     def with_label(label)
-      if label.is_a?(Regexp)
-        lights.find { |l| l.label(fetch: false) =~ label }
-      else
-        lights.find { |l| l.label(fetch: false) == label }
-      end
+      lights.find { |l| label.match l.label(fetch: false) }
     end
 
     # Returns a {LightCollection} of {Light}s tagged with `tag`
